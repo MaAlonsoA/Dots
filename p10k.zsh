@@ -37,6 +37,7 @@
     # prompt_char           # prompt symbol
     command_execution_time
     context
+    status
  )
 
   # The list of segments shown on the right. Fill it with less important segments.
