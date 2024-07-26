@@ -281,8 +281,8 @@ function extractPorts(){
 }
 
 # MKT function
-function mkt(){
- 	mkdir {nmap,content,exploits}
+function mkd(){
+ 	mkdir {scan,data,tools}
 }
 
 function settarget() {
@@ -291,6 +291,9 @@ function settarget() {
 }
 function cleartarget(){
 	echo '' > ~/.config/polybar/scripts/target
+}
+function clearvpn(){
+	~/.config/polybar/scripts/htb_status.sh
 }
 
 # Use modern completion system
