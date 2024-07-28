@@ -56,14 +56,14 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # History configurations
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=2000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
-
+setopt share_history         # share command history data
+setopt histignorealldups sharehistory
 # force zsh to show the complete history
 alias history="history 0"
 
@@ -255,12 +255,14 @@ alias l='ls -CF'
 
 # Custom Aliases
 alias cat='batcat'
+alias catn='batcat --style=plain'
+alias catnp='batcat --style=plain --paging=never'
+
 alias ll='lsd -lh --group-dirs=first'
 alias la='lsd -a --group-dirs=first'
-alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
-alias catn='/bin/cat'
+
 
 # Extract nmap information
 function extractPorts(){
