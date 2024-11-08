@@ -263,7 +263,9 @@ alias la='lsd -a --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 
+# SSH
 
+alias kssh="kitten ssh"
 # Extract nmap information
 function extractPorts(){
 	ports="$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
@@ -311,7 +313,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /home/zbr/.fzf.zsh ] && source /home/zbr/.fzf.zsh
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
