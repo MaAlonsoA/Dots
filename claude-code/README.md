@@ -16,6 +16,7 @@ Todo lo necesario está en esta carpeta: no hay que descargar nada aparte del pr
 **Línea 2:**
 - Nombre del worktree (si aplica)
 - Tokens: `in`, `out`, `cache-w`, `cache-r`, tamaño de ventana `win`
+- Cuota de uso `5h %` y `7d %` (verde <50%, amarillo <80%, rojo ≥80%) — solo aparece en cuentas con suscripción Claude.ai (Pro/Max) y tras la primera respuesta de la API en la sesión; si no aplica, el segmento simplemente no se muestra
 - Tiempo transcurrido de la sesión (alineado a la derecha)
 
 ## Contenido de la carpeta

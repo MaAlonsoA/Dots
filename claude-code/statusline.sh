@@ -247,6 +247,31 @@ if [ "$ctx_size" -gt 0 ]; then
   line2+=" $(printf '\033[2;37m')win:$(fmt_k "$ctx_size")$(printf '\033[0m')"
 fi
 
+# Rate limit quota segment (5h / 7d) — solo presente para cuentas con suscripción
+# Claude.ai (Pro/Max) tras la primera respuesta de la API en la sesión.
+five_hour=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+seven_day=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+
+quota_color_for() {
+  local pct_int=$1
+  if [ "$pct_int" -ge 80 ]; then
+    printf '\033[0;31m'   # red
+  elif [ "$pct_int" -ge 50 ]; then
+    printf '\033[0;33m'   # yellow
+  else
+    printf '\033[0;32m'   # green
+  fi
+}
+
+if [ -n "$five_hour" ]; then
+  five_int=$(printf '%.0f' "$five_hour")
+  line2+=" $(quota_color_for "$five_int")5h:${five_int}%$(printf '\033[0m')"
+fi
+if [ -n "$seven_day" ]; then
+  week_int=$(printf '%.0f' "$seven_day")
+  line2+=" $(quota_color_for "$week_int")7d:${week_int}%$(printf '\033[0m')"
+fi
+
 # Line 2 right segment: session elapsed time (right-aligned)
 if [ -n "$session_time" ]; then
   line2_visible=$(printf '%s' "$line2" | sed "s/${ESC}\[[0-9;]*m//g")
